@@ -1,0 +1,5 @@
+dbt run
+dbt run --select model_name
+dbt run -s model_name
+dbt debug
+dbt init
