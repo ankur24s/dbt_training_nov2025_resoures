@@ -238,3 +238,86 @@ delete from dev.bronze_airbnb.src_listings  where id = 3176;
 --- strategy = timestamp
 
 
+{% snapshot listings_snapshot%}
+{{
+    config
+    (
+        schema = 'snapshots',
+        database = 'dev',
+        unique_key = 'listing_id',
+        strategy = 'timestamp', 
+        updated_at = 'updated_at',
+        dbt_valid_to_current = "to_date('9999-12-31')",
+        invalidate_hard_deletes = True
+    )
+}}
+
+
+SELECT
+listing_id, 
+listing_name, 
+listing_url, 
+room_type, 
+minimum_nights, 
+host_id,
+price_str, 
+created_at, 
+updated_at
+FROM
+{{ref('silver_listings')}}
+
+{% endsnapshot %}
+
+
+
+------------
+select * from DEV.SILVER_AIRBNB.SILVER_LISTINGS where created_at >= '2021-10-01'
+
+
+SELECT 
+  listing_id,
+  listing_name,
+  room_type,
+  CASE WHEN minimum_nights = 0 THEN 1  ELSE minimum_nights END AS minimum_nights,
+  host_id,
+  REPLACE( price_str, '$') :: NUMBER(10,2) AS price,
+  created_at,
+  updated_at
+FROM DEV.SILVER_AIRBNB.SILVER_LISTINGS
+
+listing_url, room_type, minimum_nights, price_str
+
+
+select * from  DEV.SILVER_AIRBNB.SILVER_LISTINGS where listing_id = '193601'
+
+select * from  DEV.SNAPSHOTS.LISTINGS_SNAPSHOT where listing_id = '193601'
+
+
+
+
+select * from  DEV.bronze_airbnb.src_listings where id = '193601'
+
+update  DEV.bronze_airbnb.src_listings 
+set room_type = 'Vila' , created_at = current_timestamp() , updated_at = current_timestamp()
+where id = '193601'
+;
+
+select * from  dev.bronze_airbnb.src_listings  where id = 3176;
+select * from  dev.silver_airbnb.silver_listings  where listing_id = 3176;
+
+select * from dev.SNAPSHOTS.listings_snapshot where listing_id = 3176;  
+
+delete from dev.bronze_airbnb.src_listings  where id = 3176;
+
+--------------udpdated_at
+
+select * from  dev.bronze_airbnb.src_listings  where id = 40600;
+
+select * from dev.silver_airbnb.silver_listings where listing_id = 40600;
+
+select * from dev.snapshots.listings_snapshot where listing_id = 40600; 
+
+
+update  dev.bronze_airbnb.src_listings  set updated_at  = '2025-11-09' , minimum_nights = 4 where id = 40600;
+
+1M records -> "modfieid_at"= '2025-11-05'
