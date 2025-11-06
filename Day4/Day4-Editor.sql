@@ -163,3 +163,78 @@ insert into  DEV.BRONZE_AIRBNB.SRC_REVIEWS values
 
  
 select * from  DEV.GOLD_AIRBNB.FACT_REVIEWS where  (reviewer_name = 'Theodora' and listing_id = '22677') or  (reviewer_name = 'Heather' and listing_id = '816748')
+
+-------------------SNAPSHOT DEMO-----------
+
+-- strategy = check
+
+{% snapshot listings_snapshot%}
+{{
+    config
+    (
+        schema = 'snapshots',
+        database = 'dev',
+        unique_key = 'listing_id',
+        strategy = 'check', 
+        check_cols = ['listing_url', 'room_type', 'minimum_nights', 'price_str'],
+        invalidate_hard_deletes = True
+    )
+}}
+
+
+SELECT
+listing_id, 
+listing_name, 
+listing_url, 
+room_type, 
+minimum_nights, 
+host_id,
+price_str, 
+created_at, 
+updated_at
+FROM
+{{ref('silver_listings')}}
+
+{% endsnapshot %}
+
+select * from DEV.SILVER_AIRBNB.SILVER_LISTINGS where created_at >= '2021-10-01'
+
+
+SELECT 
+  listing_id,
+  listing_name,
+  room_type,
+  CASE WHEN minimum_nights = 0 THEN 1  ELSE minimum_nights END AS minimum_nights,
+  host_id,
+  REPLACE( price_str, '$') :: NUMBER(10,2) AS price,
+  created_at,
+  updated_at
+FROM DEV.SILVER_AIRBNB.SILVER_LISTINGS
+
+listing_url, room_type, minimum_nights, price_str
+
+
+select * from  DEV.SILVER_AIRBNB.SILVER_LISTINGS where listing_id = '193601'
+
+select * from  DEV.SNAPSHOTS.LISTINGS_SNAPSHOT where listing_id = '193601'
+
+
+
+
+select * from  DEV.bronze_airbnb.src_listings where id = '193601'
+
+update  DEV.bronze_airbnb.src_listings 
+set room_type = 'Vila' , created_at = current_timestamp() , updated_at = current_timestamp()
+where id = '193601'
+;
+
+select * from  dev.bronze_airbnb.src_listings  where id = 3176;
+select * from  dev.silver_airbnb.silver_listings  where listing_id = 3176;
+
+select * from dev.SNAPSHOTS.listings_snapshot where listing_id = 3176;  
+
+delete from dev.bronze_airbnb.src_listings  where id = 3176;
+
+--- strategy = timestamp
+
+
