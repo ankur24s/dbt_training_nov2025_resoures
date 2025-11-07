@@ -8,6 +8,6 @@ SELECT
   a.created_at,
   a.updated_at
 FROM
-  {{ ref('stg_listings') }} a  inner join  {{ ref('listings_snapshot') }} b
+  {{ ref('silver_listings') }} a  inner join  {{ ref('listings_snapshot') }} b
     on a.listing_id = b.listing_id
-    and current_date() between b.DBT_VALID_FROM and nvl(b.DBT_VALID_TO,'9999-12-31')
+    and current_date() between b.DBT_VALID_FROM::date and nvl(b.DBT_VALID_TO::date,'9999-12-31')

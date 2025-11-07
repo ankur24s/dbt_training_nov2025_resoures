@@ -2,11 +2,11 @@
 {{
  config(
  schema='snapshots',
- unique_key='id',
+ unique_key='host_id',
  strategy='timestamp',
  updated_at='updated_at',
  invalidate_hard_deletes=True
  )
 }}
-select * FROM {{source('src_airbnb','hosts')}}
+select * FROM  {{ref('silver_hosts')}}
 {% endsnapshot %}
