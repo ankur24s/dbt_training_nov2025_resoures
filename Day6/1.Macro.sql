@@ -45,3 +45,4 @@ on_schema_change =
 	'append_new_columns' — adds new columns without backfilling existing rows
 	'sync_all_columns' — adds columns and syncs order & data types
 -----------------------------------------
+dbt run -s fact_reviews --full-refresh
