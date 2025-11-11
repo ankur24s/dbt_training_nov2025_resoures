@@ -21,7 +21,7 @@
 run the command:
 
 dbt run-operation learn_variables --vars '{dbt_user_name: Ankur form DBT}'
-
+dbt run-operation learn_variables --vars "{""dbt_user_name"": ""Ankur from command line""}"
 -----------------------------
 3 - Setting default variable:
 

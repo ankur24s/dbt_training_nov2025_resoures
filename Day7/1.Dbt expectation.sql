@@ -1,3 +1,7 @@
+https://github.com/calogica/dbt-expectations
+https://github.com/great-expectations/great_expectations
+https://github.com/calogica/dbt-expectations/blob/main/README.md
+
 1 - dbt_expectations.expect_table_row_count_to_equal_other_table
 
  - name: dim_hosts
