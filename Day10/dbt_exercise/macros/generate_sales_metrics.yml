@@ -1,0 +1,15 @@
+version: 2
+
+macros:
+  - name: generate_sales_metrics
+    description: This macro provides total/average sales based on the amount column that will be passed 
+    docs:
+      show: true
+    arguments:
+      - name: metrics
+        type: string
+        description: metric that needs to be calculated
+
+      - name: amount_col
+        type: string
+        description: amount column to be aggregated

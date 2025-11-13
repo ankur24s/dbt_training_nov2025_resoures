@@ -1,0 +1,18 @@
+version: 2
+
+models:
+  - name: int_products
+    description: A table having Products data
+    columns:
+      - name: product_id
+        description: Product Id
+        tests:
+          - unique
+      - name: product_name
+        description: Name of the Product
+      - name: unit_price
+        description: Unit Price 
+      - name: created_date
+        description: Created Date
+      - name: lastmodified_date
+        description: Last Modified Date

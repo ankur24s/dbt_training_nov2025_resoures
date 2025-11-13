@@ -1,0 +1,30 @@
+version: 2
+
+models:
+  - name: fact_sales
+    description: A table having data for Fact Sales
+    columns:
+      - name: order_id
+        description: Order Id
+      - name: product_id
+        description: Product Id
+      - name: customer_id
+        description: Customer Id
+      - name: order_date
+        description: Order Date
+      - name: order_amount
+        description: Order Amount
+      - name: order_amount_in_inr
+        description: Order Amount in INR
+      - name: quantity
+        description: Quantity
+      - name: product_name
+        description: Name of the Product
+      - name: product_unit_price
+        description: Unit Price of the Product 
+      - name: customer_name
+        description: Name of the Customer
+      - name: country
+        description: Country 
+      - name: created_date
+        description: Created Date

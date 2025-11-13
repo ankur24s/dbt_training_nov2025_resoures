@@ -1,0 +1,19 @@
+version: 1
+
+models:
+  - name: dim_customers
+    description: A table having Customers Dimension data
+    columns:
+      - name: customer_id
+        description: Customer Id
+      - name: customer_name
+        description: Name of the Customer
+      - name: country
+        description: Country 
+      - name: created_date
+        description: Created Date
+      - name: region
+        description: Region
+        tests:
+          - accepted_values:
+              values: ['APAC', 'EMEA', 'LATAM']

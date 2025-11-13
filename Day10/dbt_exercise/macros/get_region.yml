@@ -1,0 +1,11 @@
+version: 2
+
+macros:
+  - name: get_region
+    description: This macro can be used to fetch the region based on the country that is passed
+    docs:
+      show: true
+    arguments:
+      - name: country
+        type: string
+        description: country name

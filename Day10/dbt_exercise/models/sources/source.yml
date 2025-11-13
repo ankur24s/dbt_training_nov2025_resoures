@@ -1,0 +1,49 @@
+sources:
+  - name: landing
+    description: The primary source system.
+    database: dbt_demo
+    schema: landing
+    freshness:
+      warn_after: {count: 1 , period: day}
+      error_after: {count: 1, period: day}
+    loaded_at_field: lastmodified_date
+
+    tables:
+      - name: customers
+        description: The customer table from OMS.
+        identifier: customers
+        columns:
+          - name: customer_id
+            tests:
+              - unique
+              - not_null
+          - name: region_id
+            tests:
+              - not_null:
+                  config:
+                    severity: error
+                    error_if: ">50"
+                    warn_if: ">10"
+      - name: products
+        description: The order table from OMS.
+        identifier: products
+        columns:
+          - name: product_id
+            tests:
+              - unique
+              - not_null
+      - name: sales
+        description: The order item table from OMS.
+        identifier: sales
+        columns:
+          - name: order_id
+            tests:
+              - unique
+              - not_null
+          - name: product_id
+            tests:
+              - not_null
+      - name: dates
+        description: Dates
+  
+  

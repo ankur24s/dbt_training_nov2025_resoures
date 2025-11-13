@@ -1,0 +1,17 @@
+dbt ls --select tag: --dependencies
+
+ 
+
+
+
+LOOKING FOR MORE PRACTICE QUESTIONS?
+Take a look at https://www.qanalabs.com/courses/dbt-developer
+
+
+DBT Developers hub - https://docs.getdbt.com/docs/build/documentation
+
+
+https://docs.getdbt.com/reference/commands/run
+
+
+https://docs.getdbt.com/reference/commands/run

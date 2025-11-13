@@ -1,0 +1,43 @@
+	
+Important DBT commands	
+dbt run	
+dbt test	--store-failures
+dbt debug	
+dbt init	
+dbt deps	
+dbt build	
+dbt compile	
+dbt snapshot	
+dbt seeds	
+dbt docs generate	
+dbt show	
+tags	
+exclude	
+dbt run -m tag:imp	
+dbt run -m tag:imp --exclude src_listings	
+dbt clean	
+dbt run --empty	to check what all dbt models will run without loading the data
+
+
+----------------
+{{config(tags ='sales')}}
+dbt run -m tag:sales	
+dbt run -s path:models/your_folder_name
+dbt run -s path:models/silver_airbnb
+dbt run -s path:models/silver_airbnb --exclude silver_listings
+
+
+dbt source fresheness	:
+sources:
+  - name: airbnb
+    schema: bronze_airbnb
+
+    tables:
+      - name: hosts
+        identifier: src_hosts
+        loaded_at_field: updated_at
+        freshness:
+          warn_after: {count: 3, period: day}
+          error_after: {count: 10, period: day}
+
+We can configure at source level as well.

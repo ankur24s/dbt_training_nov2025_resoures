@@ -1,0 +1,14 @@
+version: 2
+
+models:
+  - name: dim_dates
+    description: Dim Dates
+    columns:
+      - name: date
+        description: Date
+      - name: month
+        description: Month
+      - name: year
+        description: Year
+      - name: updated_at
+        description: Updated at

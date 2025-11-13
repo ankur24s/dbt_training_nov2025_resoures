@@ -1,0 +1,16 @@
+version: 2
+
+snapshots:
+  - name: products_snapshot_check
+    description: Snapshot for Products Table with check strategy
+    columns:
+      - name: product_id
+        description: Product Id
+      - name: product_name
+        description: Name of the Product
+      - name: unit_price
+        description: Unit Price 
+      - name: created_date
+        description: Created Date
+      - name: lastmodified_date
+        description: Last Modified Date
