@@ -10,6 +10,7 @@ dbt compile
 dbt snapshot	
 dbt seeds	
 dbt docs generate	
+sbt docs serve
 dbt show	
 tags	
 exclude	
@@ -17,11 +18,14 @@ dbt run -m tag:imp
 dbt run -m tag:imp --exclude src_listings	
 dbt clean	
 dbt run --empty	to check what all dbt models will run without loading the data
-
+dbt list
+ dbt list --select tag:gold --resource-type model
+ dbt list --select tag:gold --resource-type test
+dbt empty
 
 ----------------
 {{config(tags ='sales')}}
-dbt run -m tag:sales	
+dbt run -s tag:sales	
 dbt run -s path:models/your_folder_name
 dbt run -s path:models/silver_airbnb
 dbt run -s path:models/silver_airbnb --exclude silver_listings
@@ -41,3 +45,24 @@ sources:
           error_after: {count: 10, period: day}
 
 We can configure at source level as well.
+
+
+
+
+bronze -> silver- > gold -> 
+
+platinum inventory -> tags: inventory
+platinum_GL  -> tags:gl
+platinum_sales_order -> tags:sales_order
+tag:airbnd
+
+
+
+[dbt build -s +tag:inventory]
+
+[dbt build -s +tag:gl]
+
+
+
+
+
